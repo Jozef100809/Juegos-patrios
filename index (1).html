@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noviembre patrio · Juegos de Panamá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#12348a;--red:#c8102e;--white:#fff;--ink:#0d1b45;--bg:#eef2fb;--gold:#f2b705;--ok:#1a7f4b;--card:#fff;--line:#cfd8ee}
+@media (prefers-color-scheme:dark){:root{--bg:#0a1230;--ink:#e9eeff;--card:#13204d;--line:#2a3b78;--blue:#7fa0ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.55 "Public Sans",system-ui,sans-serif}
+h1,h2,h3,.disp{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1}
+header{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;min-height:230px;position:relative;overflow:hidden}
+header i{display:block}
+header .q1{background:#fff}header .q2{background:var(--red)}header .q3{background:#12348a}header .q4{background:#fff}
+header .star{position:absolute;font-size:4.5rem;line-height:1}
+header .s1{color:#12348a;left:25%;top:25%;transform:translate(-50%,-50%)}
+header .s2{color:var(--red);left:75%;top:75%;transform:translate(-50%,-50%)}
+.title{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:1rem}
+.title h1{margin:0;font-size:clamp(2rem,7vw,4rem);font-weight:800;color:#fff;background:rgba(13,27,69,.92);padding:.3em .6em;border-radius:6px}
+.title p{margin:.6rem 0 0;background:#fff;color:#0d1b45;padding:.3em .8em;border-radius:6px;font-weight:600}
+nav{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:1rem;position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:1px solid var(--line)}
+nav button{font:600 .95rem "Public Sans";border:2px solid var(--blue);background:transparent;color:var(--blue);padding:.5rem .9rem;border-radius:999px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--blue);color:#fff}
+@media (prefers-color-scheme:dark){nav button[aria-selected=true]{color:#0a1230}}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+main{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+section[hidden]{display:none}
+h2{font-size:2rem;margin:.2rem 0 .3rem}
+.sub{margin:0 0 1.2rem;opacity:.8}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin-bottom:1rem}
+.bar b{display:block;height:100%;width:0;background:var(--red);transition:width .3s}
+.q{font-size:1.25rem;font-weight:600;margin:0 0 1rem}
+.opts{display:grid;gap:.6rem}
+.opt{font:inherit;text-align:left;padding:.8rem 1rem;border:2px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt.good{border-color:var(--ok);background:rgba(26,127,75,.15)}
+.opt.bad{border-color:var(--red);background:rgba(200,16,46,.13)}
+.fb{min-height:3.2em;margin:1rem 0 .4rem}
+.go{font:600 1rem "Public Sans";background:var(--red);color:#fff;border:0;padding:.7rem 1.3rem;border-radius:10px;cursor:pointer}
+.go.alt{background:var(--blue)}
+.big{font-size:3rem;font-weight:800;margin:.2rem 0}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.tile{aspect-ratio:1/1.05;border:2px solid var(--blue);border-radius:10px;background:var(--blue);color:#fff;font:600 .8rem/1.2 "Public Sans";display:flex;align-items:center;justify-content:center;text-align:center;padding:.3rem;cursor:pointer}
+.tile.up{background:var(--card);color:var(--ink)}
+.tile.done{background:rgba(26,127,75,.18);border-color:var(--ok);color:var(--ink)}
+.tile .em{font-size:1.6rem;display:block}
+.tl{list-style:none;padding:0;margin:0 0 1rem;display:grid;gap:.5rem;counter-reset:n}
+.tl li{display:flex;align-items:center;gap:.6rem;border:2px solid var(--line);border-radius:10px;padding:.5rem .7rem;background:var(--card)}
+.tl li span{flex:1}
+.tl button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;width:2.2rem;height:2.2rem;cursor:pointer}
+.tl li.good{border-color:var(--ok)}.tl li.bad{border-color:var(--red)}
+.flag{display:grid;grid-template-columns:1fr 1fr;width:min(100%,360px);aspect-ratio:3/2;margin:0 auto 1rem;border:3px solid var(--ink);position:relative}
+.flag button{border:0;border-radius:0;cursor:pointer;font-size:3.2rem;background:#fff;color:transparent}
+.flag button.c-white{background:#fff}.flag button.c-blue{background:#12348a}.flag button.c-red{background:var(--red)}
+.flag .st-b{color:#12348a}.flag .st-r{color:var(--red)}
+.flag .st-b.c-blue,.flag .st-r.c-red{color:rgba(255,255,255,.55)}
+.center{text-align:center}
+.note{font-size:.85rem;opacity:.7;text-align:center;margin-top:2rem}
+body{background:radial-gradient(1200px 500px at 50% -100px,rgba(18,52,138,.14),transparent),var(--bg)}
+header{min-height:260px;box-shadow:0 6px 24px rgba(13,27,69,.25)}
+header .star{animation:starIn .9s cubic-bezier(.2,1.4,.4,1) both;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
+header .s2{animation-delay:.25s}
+@keyframes starIn{from{transform:translate(-50%,-50%) scale(0) rotate(-120deg);opacity:0}to{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:1}}
+.title h1{letter-spacing:-.02em;box-shadow:0 8px 24px rgba(0,0,0,.3);border-bottom:5px solid var(--gold)}
+.title p{box-shadow:0 4px 14px rgba(0,0,0,.2)}
+nav{backdrop-filter:blur(8px);box-shadow:0 4px 14px rgba(13,27,69,.1)}
+nav button{transition:transform .15s,background .2s}
+nav button:hover{transform:translateY(-2px)}
+.hud{font:800 1rem "Bricolage Grotesque";background:var(--gold);color:#0d1b45;padding:.5rem .9rem;border-radius:999px;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.hud.bump{animation:bump .4s}
+@keyframes bump{50%{transform:scale(1.25)}}
+.card{box-shadow:0 10px 30px rgba(13,27,69,.12);border-radius:18px;padding:1.5rem}
+.opt{transition:transform .15s,border-color .15s,background .15s;font-weight:600}
+.opt:hover:not(:disabled){transform:translateX(5px);background:rgba(18,52,138,.07)}
+.opt.good{animation:pop .45s}
+.opt.bad{animation:shake .4s}
+@keyframes pop{40%{transform:scale(1.04)}}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.bar{height:12px}.bar b{background:linear-gradient(90deg,var(--red),var(--gold))}
+.go{box-shadow:0 4px 0 rgba(0,0,0,.25);transition:transform .1s,box-shadow .1s}
+.go:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.go:hover{filter:brightness(1.08)}
+.streak{display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:.1em .7em;font-weight:800;margin-left:.4rem;animation:pop .4s}
+.tile{transition:transform .25s,background .2s;font-size:.85rem;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.tile:hover{transform:translateY(-3px)}
+.tile.up{animation:flip .35s}
+.tile.done{animation:pop .5s}
+@keyframes flip{from{transform:rotateY(90deg)}to{transform:rotateY(0)}}
+.tl li{transition:transform .2s,box-shadow .2s;box-shadow:0 2px 8px rgba(13,27,69,.08)}
+.tl li:hover{transform:translateX(4px)}
+.tl button:hover{background:var(--blue);color:#fff}
+.flag{box-shadow:0 12px 30px rgba(13,27,69,.35)}
+.flag button{transition:background .25s;font-size:3.6rem}
+.flag button:hover{filter:brightness(.92)}
+#cf{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <i class="q1"></i><i class="q2"></i><i class="q3"></i><i class="q4"></i>
+  <span class="star s1">★</span><span class="star s2">★</span>
+  <div class="title"><h1>Noviembre patrio</h1><p>Juegos sobre la República de Panamá</p></div>
+</header>
+<nav id="nav" role="tablist" aria-label="Juegos">
+  <button role="tab" data-g="t1" aria-selected="true">Trivia: la República</button>
+  <button role="tab" data-g="t2" aria-selected="false">Trivia: símbolos</button>
+  <button role="tab" data-g="mem" aria-selected="false">Memoria patria</button>
+  <button role="tab" data-g="tl" aria-selected="false">Línea del tiempo</button>
+  <button role="tab" data-g="flag" aria-selected="false">Pinta la bandera</button>
+  <span class="hud" id="hud" aria-live="polite">⭐ 0 pts</span>
+</nav>
+<canvas id="cf" aria-hidden="true"></canvas>
+<main>
+  <section id="t1"><h2>Formación de la República</h2><p class="sub">Separación de 1903, Junta de Gobierno y Constitución de 1904.</p><div class="card quiz"></div></section>
+  <section id="t2" hidden><h2>Símbolos patrios</h2><p class="sub">Bandera, escudo, himno, ave y flor nacional.</p><div class="card quiz"></div></section>
+  <section id="mem" hidden>
+    <h2>Memoria patria</h2><p class="sub">Une cada símbolo o hecho con su dato. Voltea dos fichas por turno.</p>
+    <div class="card"><p id="memInfo" class="center"></p><div class="mem" id="memGrid"></div><p class="center"><button class="go alt" id="memReset">Barajar de nuevo</button></p></div>
+  </section>
+  <section id="tl" hidden>
+    <h2>Línea del tiempo</h2><p class="sub">Ordena los hechos del más antiguo al más reciente con las flechas.</p>
+    <div class="card"><ol class="tl" id="tlList"></ol><p class="center"><button class="go" id="tlCheck">Comprobar orden</button> <button class="go alt" id="tlShuffle">Mezclar</button></p><p class="fb center" id="tlFb" aria-live="polite"></p></div>
+  </section>
+  <section id="flag" hidden>
+    <h2>Pinta la bandera</h2><p class="sub">Toca cada cuadrante para cambiar su color: blanco, azul o rojo.</p>
+    <div class="card center">
+      <div class="flag" id="flagBox"></div>
+      <button class="go" id="flagCheck">Comprobar bandera</button>
+      <p class="fb" id="flagFb" aria-live="polite"></p>
+    </div>
+  </section>
+  <p class="note">Hecho para las fiestas patrias de noviembre. Datos con fines educativos.</p>
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ---------- Puntos y confeti ---------- */
+let pts=0,streak=0;
+function award(n){pts+=n;const h=$('#hud');h.textContent='⭐ '+pts+' pts';h.classList.remove('bump');void h.offsetWidth;h.classList.add('bump')}
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const c=$('#cf'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+  const cols=['#c8102e','#12348a','#ffffff','#f2b705'];
+  const P=Array.from({length:160},()=>({x:c.width/2,y:c.height*.35,vx:(Math.random()-.5)*16,vy:-Math.random()*14-3,s:5+Math.random()*7,r:Math.random()*6,c:cols[Math.random()*4|0]}));
+  let f=0;(function t(){
+    x.clearRect(0,0,c.width,c.height);
+    P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.r+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.strokeStyle='rgba(0,0,0,.2)';x.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);x.strokeRect(-p.s/2,-p.s/2,p.s,p.s*.6);x.restore()});
+    if(++f<150)requestAnimationFrame(t);else x.clearRect(0,0,c.width,c.height);
+  })();
+}
+
+/* ---------- Navegación ---------- */
+const tabs=[...document.querySelectorAll('#nav button')];
+tabs.forEach(b=>b.onclick=()=>{
+  tabs.forEach(t=>t.setAttribute('aria-selected',t===b));
+  document.querySelectorAll('main section').forEach(s=>s.hidden=s.id!==b.dataset.g);
+});
+
+/* ---------- Trivias ---------- */
+const DATA={
+t1:[
+ ["¿En qué fecha Panamá se separó de Colombia?",["3 de noviembre de 1903","28 de noviembre de 1821","4 de noviembre de 1904","13 de febrero de 1903"],0,"La separación de Colombia se proclamó el 3 de noviembre de 1903."],
+ ["¿Cuántos miembros tuvo la Junta de Gobierno Provisional?",["Tres","Cinco","Siete","Nueve"],0,"Fueron tres: José Agustín Arango, Federico Boyd y Tomás Arias."],
+ ["¿Cuál de estos nombres NO integró la Junta de Gobierno Provisional?",["Tomás Arias","José Agustín Arango","Federico Boyd","Belisario Porras"],3,"Belisario Porras fue figura importante después, pero no formó parte de la Junta."],
+ ["¿En qué año se aprobó la primera Constitución de la República?",["1904","1903","1925","1946"],0,"La Convención Nacional Constituyente aprobó la Constitución en 1904."],
+ ["¿Qué organismo redactó la Constitución de 1904?",["La Convención Nacional Constituyente","La Asamblea de Cundinamarca","El Consejo de Estado","El Cabildo de Santa María"],0,"Fue una Convención Nacional Constituyente, reunida tras la separación."],
+ ["¿Quién fue el primer presidente de la República de Panamá?",["Manuel Amador Guerrero","Belisario Porras","Tomás Arias","Justo Arosemena"],0,"Manuel Amador Guerrero asumió la presidencia en 1904."],
+ ["¿Qué tratado se firmó el 18 de noviembre de 1903 sobre la construcción del canal?",["Hay–Bunau-Varilla","Torrijos–Carter","Mallarino–Bidlack","Wyse"],0,"El tratado Hay–Bunau-Varilla se firmó 15 días después de la separación."]
+],
+t2:[
+ ["¿Qué colores tiene la bandera de Panamá?",["Azul, blanco y rojo","Verde, blanco y rojo","Azul, amarillo y rojo","Rojo y blanco"],0,"Tiene cuatro cuadrantes en azul, blanco y rojo, con dos estrellas."],
+ ["¿Quién diseñó la bandera de Panamá?",["Manuel E. Amador","Nicanor Villalaz","Jerónimo de la Ossa","Santos Jorge"],0,"Manuel Encarnación Amador, hijo del primer presidente, la diseñó; María Ossa de Amador la cosió."],
+ ["¿Qué día se celebra el Día de la Bandera?",["4 de noviembre","3 de noviembre","10 de noviembre","28 de noviembre"],0,"Cada 4 de noviembre se recuerda cuando ondeó por primera vez."],
+ ["¿De qué color es la estrella del cuadrante blanco superior de la bandera?",["Azul","Roja","Dorada","Blanca"],0,"La estrella azul está en el cuadrante blanco superior izquierdo; la roja, en el inferior derecho."],
+ ["¿Qué dice el lema del escudo nacional?",["Pro Mundi Beneficio","Ordem e Progresso","Libertad y Orden","Dios, Patria y Ley"],0,"“Pro Mundi Beneficio” significa “Para beneficio del mundo”."],
+ ["¿Quién fue el autor de la letra del Himno Nacional?",["Jerónimo de la Ossa","Santos Jorge","Nicanor Villalaz","Manuel Amador Guerrero"],0,"Jerónimo de la Ossa escribió la letra; Santos Jorge compuso la música."],
+ ["¿Cuál es el ave nacional de Panamá?",["Águila harpía","Quetzal","Tucán","Cóndor"],0,"El águila harpía, una de las rapaces más poderosas del mundo."],
+ ["¿Cuál es la flor nacional de Panamá?",["Flor del Espíritu Santo","Rosa blanca","Hibisco","Girasol"],0,"Es una orquídea (Peristeria elata) también llamada flor de la paloma."]
+]};
+
+function quiz(box,qs){
+  let i=0,score=0,order=shuffle(qs);
+  const draw=()=>{
+    if(i>=order.length){
+      const pct=Math.round(score/order.length*100);
+      if(pct>=80)confetti();const msg=pct==100?"¡Patriota de pura cepa!":pct>=60?"¡Muy bien, sigue repasando!":"Buen intento, vuelve a jugar para mejorar.";
+      box.innerHTML=`<div class="center"><div class="disp big">${score} / ${order.length}</div><p>${msg}</p><button class="go">Jugar otra vez</button></div>`;
+      $('.go',box).onclick=()=>{i=0;score=0;order=shuffle(qs);draw()};return;
+    }
+    const [q,o,c,e]=order[i];
+    const opts=shuffle(o.map((t,k)=>({t,ok:k===c})));
+    box.innerHTML=`<div class="bar"><b style="width:${i/order.length*100}%"></b></div>
+      <p class="q">${i+1}. ${q}</p><div class="opts">${opts.map((x,k)=>`<button class="opt" data-k="${k}">${x.t}</button>`).join('')}</div>
+      <p class="fb" aria-live="polite"></p>`;
+    box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      const x=opts[b.dataset.k];
+      box.querySelectorAll('.opt').forEach((bb,k)=>{bb.disabled=true;if(opts[k].ok)bb.classList.add('good')});
+      if(x.ok){score++;award(10+Math.min(streak,5)*2);streak++}else{streak=0;b.classList.add('bad')}
+      $('.fb',box).innerHTML=(x.ok?'<strong>¡Correcto!</strong>'+(streak>1?'<span class="streak">🔥 racha x'+streak+'</span> ':' '):'<strong>Casi.</strong> ')+e+'<br><br><button class="go alt">Siguiente</button>';
+      $('.fb .go',box).onclick=()=>{i++;draw()};
+      $('.fb .go',box).focus();
+    });
+  };
+  draw();
+}
+quiz($('#t1 .quiz'),DATA.t1);quiz($('#t2 .quiz'),DATA.t2);
+
+/* ---------- Memoria ---------- */
+const PAIRS=[["🏳️ Bandera","Manuel E. Amador"],["🛡️ Escudo","Pro Mundi Beneficio"],["🎵 Himno","Letra de Jerónimo de la Ossa"],["🦅 Ave nacional","Águila harpía"],["🌸 Flor nacional","Flor del Espíritu Santo"],["📜 Junta de Gobierno","Arango, Boyd y Arias"]];
+let flipped=[],lock=false,found=0,tries=0;
+function memStart(){
+  found=0;tries=0;flipped=[];lock=false;
+  const cards=shuffle(PAIRS.flatMap((p,k)=>[{k,t:p[0]},{k,t:p[1]}]));
+  const g=$('#memGrid');g.innerHTML='';
+  cards.forEach(c=>{
+    const b=document.createElement('button');b.className='tile';b.textContent='★';b.setAttribute('aria-label','Ficha oculta');
+    b.onclick=()=>{
+      if(lock||b.classList.contains('up')||b.classList.contains('done'))return;
+      b.classList.add('up');b.textContent=c.t;flipped.push([b,c]);
+      if(flipped.length===2){
+        tries++;const [[b1,c1],[b2,c2]]=flipped;
+        if(c1.k===c2.k){b1.className=b2.className='tile done';found++;flipped=[];award(15);info();if(found===PAIRS.length){award(30);confetti()}}
+        else{lock=true;setTimeout(()=>{[b1,b2].forEach(x=>{x.className='tile';x.textContent='★'});flipped=[];lock=false},1100);info()}
+      }
+    };
+    g.appendChild(b);
+  });
+  info();
+}
+function info(){$('#memInfo').textContent=found===PAIRS.length?`¡Completaste todas las parejas en ${tries} intentos!`:`Parejas: ${found} / ${PAIRS.length} · Intentos: ${tries}`}
+$('#memReset').onclick=memStart;memStart();
+
+/* ---------- Línea del tiempo ---------- */
+const EV=[["28 nov 1821","Independencia de España","El Istmo se une a la Gran Colombia"],["3 nov 1903","Separación de Colombia","Se proclama la República"],["4 nov 1903","Junta de Gobierno Provisional","Arango, Boyd y Arias asumen el mando"],["18 nov 1903","Tratado Hay–Bunau-Varilla","Se firma el tratado sobre el canal"],["1904","Constitución de la República","La Convención Constituyente la aprueba"]];
+let tlOrder;
+function tlDraw(res){
+  const ul=$('#tlList');ul.innerHTML='';
+  tlOrder.forEach((e,pos)=>{
+    const li=document.createElement('li');
+    if(res)li.className=EV.indexOf(e)===pos?'good':'bad';
+    li.innerHTML=`<span><strong>${e[1]}</strong><br><small>${e[2]}</small>${res?`<br><small>${e[0]}</small>`:''}</span><button aria-label="Subir">↑</button><button aria-label="Bajar">↓</button>`;
+    const [up,dn]=li.querySelectorAll('button');
+    up.onclick=()=>mv(pos,-1);dn.onclick=()=>mv(pos,1);
+    ul.appendChild(li);
+  });
+}
+function mv(p,d){const q=p+d;if(q<0||q>=tlOrder.length)return;[tlOrder[p],tlOrder[q]]=[tlOrder[q],tlOrder[p]];$('#tlFb').textContent='';tlDraw()}
+function tlStart(){do{tlOrder=shuffle(EV)}while(tlOrder.every((e,i)=>e===EV[i]));$('#tlFb').textContent='';tlDraw()}
+$('#tlCheck').onclick=()=>{
+  const ok=tlOrder.filter((e,i)=>e===EV[i]).length;
+  tlDraw(true);if(ok===EV.length){award(40);confetti()}
+  $('#tlFb').textContent=ok===EV.length?'¡Orden perfecto! Eres un historiador de la República.':`${ok} de ${EV.length} en su lugar. Los verdes están bien, ajusta los rojos.`;
+};
+$('#tlShuffle').onclick=()=>{streak=0;tlStart()};tlStart();
+
+/* ---------- Pinta la bandera ---------- */
+const COL=['white','blue','red'],NAME={white:'blanco',blue:'azul',red:'rojo'};
+const GOAL=['white','red','blue','white'];
+const state=['blue','blue','white','red'];
+const fb=$('#flagBox');
+state.forEach((c,i)=>{
+  const b=document.createElement('button');
+  b.className='c-'+c+(i===0?' st-b':i===3?' st-r':'');
+  b.textContent=(i===0||i===3)?'★':'';
+  b.setAttribute('aria-label','Cuadrante '+(i+1)+': '+NAME[c]);
+  b.onclick=()=>{
+    state[i]=COL[(COL.indexOf(state[i])+1)%3];
+    b.classList.remove('c-white','c-blue','c-red');b.classList.add('c-'+state[i]);
+    b.setAttribute('aria-label','Cuadrante '+(i+1)+': '+NAME[state[i]]);
+    $('#flagFb').textContent='';
+  };
+  fb.appendChild(b);
+});
+$('#flagCheck').onclick=()=>{
+  const ok=state.filter((c,i)=>c===GOAL[i]).length;
+  if(ok===4){award(25);confetti()}$('#flagFb').innerHTML=ok===4?'<strong>¡Bandera perfecta!</strong> Arriba a la izquierda blanco con estrella azul, arriba a la derecha rojo, abajo a la izquierda azul y abajo a la derecha blanco con estrella roja.':`Tienes ${ok} de 4 cuadrantes bien. Pista: las estrellas van sobre blanco, la azul arriba y la roja abajo.`;
+};
+</script>
+</body>
+</html>
